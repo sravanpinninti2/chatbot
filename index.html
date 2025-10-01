@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A Message for Revathi Shetty</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Playfair+Display:wght@600&family=IM+Fell+English&family=Dancing+Script:wght@700&family=Montserrat:wght@300&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg: #0a0a0c;
+            --fg: #d9d9da;
+            --muted: #9a9aa0;
+            --accent: #ff69b4; /* Love theme accent color */
+            --glow: #ff69b4;
+            --line: #2a2a33;
+            --hint: #6a6a72;
+            --green: #2bdc6d;
+        }
+
+        /* --- GLOBAL & LOGIN STYLES --- */
+        * { box-sizing: border-box; }
+        html, body { height: 100%; }
+        body {
+            margin: 0;
+            background: radial-gradient(1200px 800px at 15% 10%, #121217, #0a0a0c 60%, #050507);
+            color: var(--fg);
+            font-family: "IM Fell English", serif;
+            overflow: hidden;
+            transition: background 0.8s ease-in-out;
+        }
+
+        /* The main container that centers everything */
+        .wrap {
+            height: 100%;
+            display: grid;
+            place-items: center;
+            padding: 4vmin;
+        }
+
+        /* --- LOGIN PANEL STYLES --- */
+        .panel-login {
+            width: min(480px, 90vw);
+            background: linear-gradient(180deg, rgba(255, 255, 255, .02), rgba(0, 0, 0, .2));
+            border: 1px solid var(--line);
+            border-radius: 14px;
+            padding: 28px 24px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, .6);
+            backdrop-filter: blur(4px);
+            text-align: center;
+        }
+        h1.glitch {
+            font-family: "Cinzel Decorative", serif;
+            font-size: clamp(28px, 6vw, 48px);
+            letter-spacing: 1px;
+            position: relative;
+            display: inline-block;
+            margin: 8px 0 2px;
+            text-shadow: 0 0 4px rgba(255, 105, 180, .6), 0 0 18px rgba(255, 105, 180, .35);
+        }
+        .subtitle { color: var(--hint); font-family: "Playfair Display", serif; margin: 0 0 14px; }
+        .lbl { display: block; text-align: left; margin: 14px 2px 6px; color: var(--muted); font-size: .95rem; }
+        input {
+            width: 100%; padding: 12px 14px; border-radius: 10px; border: 1px solid #202028; outline: none;
+            background: #0d0d12; color: var(--fg);
+        }
+        input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(255, 105, 180, .15); }
+        .btn {
+            margin-top: 20px; width: 100%; padding: 12px 16px; border: none; border-radius: 10px; cursor: pointer;
+            background: linear-gradient(180deg, #ff69b4, #c71585); color: #fff; font-weight: 600; letter-spacing: .6px;
+            box-shadow: 0 6px 16px rgba(0, 0, 0, .5);
+            transition: transform .1s ease, box-shadow .2s ease;
+        }
+        .btn:hover { box-shadow: 0 8px 22px rgba(0, 0, 0, .6), 0 0 20px rgba(255, 105, 180, .3); }
+        .btn:active { transform: translateY(1px); }
+        #error { color: var(--accent); min-height: 20px; margin-top: 10px; font-size: .9rem; font-weight: bold; }
+
+        /* --- HIDDEN LOVE THEME SECTION --- */
+        #love-section {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            pointer-events: none; /* Can't interact with it while hidden */
+            transition: opacity 1.5s ease-in-out;
+        }
+
+        /* --- BACKGROUND IMAGES & OVERLAY --- */
+        .background-collage {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            display: grid; grid-template-columns: 1fr 1fr; z-index: -2;
+        }
+        .background-image {
+            background-size: cover; background-position: center;
+            filter: grayscale(80%); opacity: 0.6;
+        }
+        .background-image.img1 { background-image: url('revathi_1.jpg'); }
+        .background-image.img2 { background-image: url('revathi_2.jpg'); }
+        .love-section-overlay {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(circle, rgba(255, 182, 193, 0.2) 0%, rgba(139, 0, 139, 0.5) 100%);
+            z-index: -1;
+        }
+
+        /* --- ANIMATED HEARTS --- */
+        .hearts {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            pointer-events: none; z-index: 0;
+        }
+        .heart {
+            position: absolute;
+            background-color: rgba(255, 255, 255, 0.8);
+            width: 12px; height: 12px;
+            transform: rotate(-45deg);
+            animation: floatHearts 15s infinite ease-in;
+            opacity: 0;
+        }
+        .heart::before, .heart::after {
+            content: ''; background-color: inherit; border-radius: 50%;
+            position: absolute; width: 100%; height: 100%;
+        }
+        .heart::before { top: -50%; left: 0; }
+        .heart::after { left: 50%; top: 0; }
+        .heart:nth-child(1) { left: 10%; animation-delay: 0s; animation-duration: 12s; transform: scale(0.8) rotate(-45deg); }
+        .heart:nth-child(2) { left: 25%; animation-delay: 2s; animation-duration: 10s; transform: scale(1.1) rotate(-45deg); }
+        .heart:nth-child(3) { left: 40%; animation-delay: 4s; animation-duration: 14s; transform: scale(0.9) rotate(-45deg); }
+        .heart:nth-child(4) { left: 55%; animation-delay: 6s; animation-duration: 11s; transform: scale(1.2) rotate(-45deg); }
+        .heart:nth-child(5) { left: 70%; animation-delay: 8s; animation-duration: 13s; transform: scale(0.7) rotate(-45deg); }
+        .heart:nth-child(6) { left: 85%; animation-delay: 1s; animation-duration: 9s; transform: scale(1.0) rotate(-45deg); }
+
+        @keyframes floatHearts {
+            0% { transform: translateY(100vh) scale(0) rotate(-45deg); opacity: 0; }
+            5% { opacity: 0.8; }
+            100% { transform: translateY(-10vh) scale(1.2) rotate(-45deg); opacity: 0; }
+        }
+
+        /* --- CONTENT ON REVEAL --- */
+        .content-container {
+            text-align: center;
+            background: rgba(20, 0, 20, 0.4);
+            padding: 40px 60px;
+            border-radius: 15px;
+            backdrop-filter: blur(8px);
+            box-shadow: 0 0 40px rgba(255, 105, 180, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .name {
+            font-family: 'Dancing Script', cursive;
+            font-size: clamp(3rem, 15vw, 6rem);
+            color: #fff; margin: 0;
+            text-shadow: 0 0 10px #fff, 0 0 20px var(--accent), 0 0 30px var(--accent);
+        }
+        .love-message {
+            font-family: 'Montserrat', sans-serif;
+            font-size: clamp(1rem, 3vw, 1.5rem);
+            color: #f0f0f0; margin-top: 15px; line-height: 1.5;
+        }
+
+    </style>
+</head>
+<body>
+
+    <!-- SECTION 1: LOGIN PANEL (Visible by default) -->
+    <main class="wrap" id="login-section">
+        <section class="panel-login">
+            <h1 class="glitch" data-text="A Secret Message">A Secret Message</h1>
+            <p class="subtitle">Just for you, Revathi</p>
+
+            <form id="login-form" autocomplete="off" novalidate>
+                <label class="lbl" for="userId">Your Name (ID)</label>
+                <input id="userId" name="userId" type="text" placeholder="Enter your name" required />
+
+                <label class="lbl" for="password">Special Password</label>
+                <input id="password" name="password" type="password" placeholder="Enter the password" required />
+
+                <button class="btn" type="submit">Unlock Message</button>
+                <p id="error" role="alert"></p>
+            </form>
+        </section>
+    </main>
+
+    <!-- SECTION 2: LOVE THEME (Hidden by default) -->
+    <div id="love-section">
+        <div class="background-collage">
+            <div class="background-image img1"></div>
+            <div class="background-image img2"></div>
+        </div>
+        <div class="love-section-overlay"></div>
+        <div class="hearts">
+            <div class="heart"></div><div class="heart"></div><div class="heart"></div>
+            <div class="heart"></div><div class="heart"></div><div class="heart"></div>
+        </div>
+        <div class="content-container">
+            <h1 class="name">My Dearest Revathi</h1>
+            <p class="love-message">Happy Birthday, Revathi.
+
+Forget the gifts and the cake. The only thing that matters today is your day enjoy chey & happy ga vundu em jarigina nenu okadini vuna ani marchipoku as a friend ga (or) close friend ga, okati aduguta answer istava nanu matram marchipoku please...... ..<br>Thank you for being you.</p>
+        </div>
+    </div>
+    
+    <audio id="reveal-audio" preload="auto">
+        <source src="https://cdn.pixabay.com/download/audio/2022/02/12/audio_c681b0a823.mp3" type="audio/mpeg">
+    </audio>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const loginForm = document.getElementById('login-form');
+            const loginSection = document.getElementById('login-section');
+            const loveSection = document.getElementById('love-section');
+            const audio = document.getElementById('reveal-audio');
+            
+            const userIdInput = document.getElementById('userId');
+            const passwordInput = document.getElementById('password');
+            const errorEl = document.getElementById('error');
+            
+            // --- Set the correct credentials here ---
+            const CORRECT_ID = 'revathi';
+            const CORRECT_PASSWORD = 'Revathi@25';
+
+            loginForm.addEventListener('submit', (e) => {
+                e.preventDefault(); // Stop the form from reloading the page
+                
+                const enteredId = userIdInput.value.trim().toLowerCase();
+                const enteredPassword = passwordInput.value.trim();
+
+                if (enteredId === CORRECT_ID && enteredPassword === CORRECT_PASSWORD) {
+                    // --- SUCCESS ---
+                    errorEl.textContent = '';
+                    console.log('Access Granted');
+                    
+                    // Hide login form and show the love section with a fade
+                    loginSection.style.transition = 'opacity 0.5s ease-out';
+                    loginSection.style.opacity = '0';
+                    
+                    setTimeout(() => {
+                        loginSection.style.display = 'none';
+                        loveSection.style.pointerEvents = 'auto';
+                        loveSection.style.opacity = '1';
+                        
+                        // Play romantic music
+                        audio.volume = 0.4;
+                        audio.play();
+                    }, 500); // Wait for the fade out to finish
+
+                } else {
+                    // --- FAILURE ---
+                    errorEl.textContent = 'Incorrect ID or Password. Please try again.';
+                    console.log('Access Denied');
+                    loginForm.reset(); // Clear the form
+                }
+            });
+        });
+    </script>
+</body>
+</html>
